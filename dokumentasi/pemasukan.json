@@ -1,0 +1,179 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "API Pemasukan",
+      "version": "1.0.0",
+      "description": "API untuk mengelola data pemasukan dengan metode CRUD"
+    },
+    "servers": [
+      {
+        "url": "http://localhost/catatan-keuangan/pendapatan.php"
+      }
+    ],
+    "paths": {
+      "/": {
+        "post": {
+          "summary": "Create Pemasukan",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Pemasukan"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Pemasukan berhasil dibuat",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Pemasukan"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Permintaan tidak valid"
+            }
+          }
+        },
+        "get": {
+          "summary": "Get All Pemasukan",
+          "responses": {
+            "200": {
+              "description": "Daftar semua pemasukan",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Pemasukan"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/{id}": {
+        "get": {
+          "summary": "Get Pemasukan by ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Informasi pemasukan",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Pemasukan"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Pemasukan tidak ditemukan"
+            }
+          }
+        },
+        "put": {
+          "summary": "Update Pemasukan",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Pemasukan"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Pemasukan berhasil diperbarui",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Pemasukan"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Permintaan tidak valid"
+            },
+            "404": {
+              "description": "Pemasukan tidak ditemukan"
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete Pemasukan",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Pemasukan berhasil dihapus"
+            },
+            "404": {
+              "description": "Pemasukan tidak ditemukan"
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "Pemasukan": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "readOnly": true
+            },
+            "jumlah": {
+              "type": "number"
+            },
+            "tanggal": {
+              "type": "string",
+              "format": "date"
+            },
+            "keterangan": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+  

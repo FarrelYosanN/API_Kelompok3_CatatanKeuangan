@@ -1,0 +1,179 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "API Pengeluaran",
+      "version": "1.0.0",
+      "description": "API untuk mengelola data pengeluaran dengan metode CRUD"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:8080/api/pengeluaran"
+      }
+    ],
+    "paths": {
+      "/": {
+        "post": {
+          "summary": "Create Pengeluaran",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Pengeluaran"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Pengeluaran berhasil dibuat",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Pengeluaran"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Permintaan tidak valid"
+            }
+          }
+        },
+        "get": {
+          "summary": "Get All Pengeluaran",
+          "responses": {
+            "200": {
+              "description": "Daftar semua pengeluaran",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Pengeluaran"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/{id}": {
+        "get": {
+          "summary": "Get Pengeluaran by ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Informasi pengeluaran",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Pengeluaran"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Pengeluaran tidak ditemukan"
+            }
+          }
+        },
+        "put": {
+          "summary": "Update Pengeluaran",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Pengeluaran"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Pengeluaran berhasil diperbarui",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Pengeluaran"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Permintaan tidak valid"
+            },
+            "404": {
+              "description": "Pengeluaran tidak ditemukan"
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete Pengeluaran",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Pengeluaran berhasil dihapus"
+            },
+            "404": {
+              "description": "Pengeluaran tidak ditemukan"
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "Pengeluaran": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "readOnly": true
+            },
+            "jumlah": {
+              "type": "number"
+            },
+            "tanggal": {
+              "type": "string",
+              "format": "date"
+            },
+            "keterangan": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+  

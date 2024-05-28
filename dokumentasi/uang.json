@@ -1,0 +1,175 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "API Uang",
+      "version": "1.0.0",
+      "description": "API untuk mengelola data uang dengan metode CRUD"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:8080/api/uang"
+      }
+    ],
+    "paths": {
+      "/": {
+        "post": {
+          "summary": "Create Uang",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Uang"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Uang berhasil dibuat",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Uang"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Permintaan tidak valid"
+            }
+          }
+        },
+        "get": {
+          "summary": "Get All Uang",
+          "responses": {
+            "200": {
+              "description": "Daftar semua uang",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Uang"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/{id}": {
+        "get": {
+          "summary": "Get Uang by ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Informasi uang",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Uang"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Uang tidak ditemukan"
+            }
+          }
+        },
+        "put": {
+          "summary": "Update Uang",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Uang"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Uang berhasil diperbarui",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Uang"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Permintaan tidak valid"
+            },
+            "404": {
+              "description": "Uang tidak ditemukan"
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete Uang",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Uang berhasil dihapus"
+            },
+            "404": {
+              "description": "Uang tidak ditemukan"
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "Uang": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "readOnly": true
+            },
+            "jumlah": {
+              "type": "number"
+            },
+            "mata_uang": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+  

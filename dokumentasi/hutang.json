@@ -1,0 +1,182 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+      "title": "API Hutang",
+      "version": "1.0.0",
+      "description": "API untuk mengelola data hutang dengan metode CRUD"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:8080/api/hutang"
+      }
+    ],
+    "paths": {
+      "/": {
+        "post": {
+          "summary": "Create Hutang",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Hutang"
+                }
+              }
+            }
+          },
+          "responses": {
+            "201": {
+              "description": "Hutang berhasil dibuat",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Hutang"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Permintaan tidak valid"
+            }
+          }
+        },
+        "get": {
+          "summary": "Get All Hutang",
+          "responses": {
+            "200": {
+              "description": "Daftar semua hutang",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/components/schemas/Hutang"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "/{id}": {
+        "get": {
+          "summary": "Get Hutang by ID",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Informasi hutang",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Hutang"
+                  }
+                }
+              }
+            },
+            "404": {
+              "description": "Hutang tidak ditemukan"
+            }
+          }
+        },
+        "put": {
+          "summary": "Update Hutang",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Hutang"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Hutang berhasil diperbarui",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Hutang"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Permintaan tidak valid"
+            },
+            "404": {
+              "description": "Hutang tidak ditemukan"
+            }
+          }
+        },
+        "delete": {
+          "summary": "Delete Hutang",
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "schema": {
+                "type": "integer"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Hutang berhasil dihapus"
+            },
+            "404": {
+              "description": "Hutang tidak ditemukan"
+            }
+          }
+        }
+      }
+    },
+    "components": {
+      "schemas": {
+        "Hutang": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "integer",
+              "readOnly": true
+            },
+            "jumlah": {
+              "type": "number"
+            },
+            "tgl_hutang": {
+              "type": "string",
+              "format": "date"
+            },
+            "alasan": {
+              "type": "string"
+            },
+            "penghutang": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+  
